@@ -1,4 +1,5 @@
 import 'package:coinedone/constants/colors/app_colors.dart';
+import 'package:coinedone/view/widgets/alertdialog.dart';
 import 'package:coinedone/view/widgets/calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
@@ -90,24 +91,21 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.only(left: 300, bottom: 10),
             child: FloatingActionButton.small(
               onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return alert; // 'alert' is the AlertDialog defined in your code
+                  },
+                );
+
                 // Navigator.push(
                 //   context,
-                //   MaterialPageRoute(builder: (context) => const MapPage()),
+                //   MaterialPageRoute(builder: (context) =>  ),
                 // );
               },
               child: const Icon(Icons.add),
             ),
           ),
-          //   Positioned(
-          //     left: 320,
-          //     top: 420,
-          //     child: FloatingActionButton(
-          //       onPressed: () {},
-          //       child: Icon(
-          //         Icons.add,
-          //       ),
-          //     ),
-          //   ),
         ],
       ),
     );

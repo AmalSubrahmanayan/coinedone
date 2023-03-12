@@ -1,4 +1,5 @@
 import 'package:coinedone/view/home_screen/home_screen.dart';
+import 'package:coinedone/view/widgets/bottomsheet.dart';
 import 'package:flutter/material.dart';
 
 void main() {

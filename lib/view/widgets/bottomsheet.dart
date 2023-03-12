@@ -1,10 +1,15 @@
+import 'package:coinedone/blocs/controller.dart';
 import 'package:coinedone/constants/colors/app_colors.dart';
 import 'package:coinedone/constants/sizedboxes/app_sizedboxes.dart';
 import 'package:flutter/material.dart';
 
 class BottenSheet extends StatelessWidget {
-  const BottenSheet({super.key});
-
+  BottenSheet({super.key});
+  final TextEditingController namecontroller = TextEditingController();
+  final TextEditingController starttimecontroller = TextEditingController();
+  final TextEditingController endtimecontroller = TextEditingController();
+  final TextEditingController datecontroller = TextEditingController();
+  final TextEditingController phonenumbetcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +32,7 @@ class BottenSheet extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.close),
+                  icon: const Icon(Icons.close),
                   onPressed: () => Navigator.pop(context),
                 )
               ],
@@ -47,6 +52,7 @@ class BottenSheet extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextFormField(
+                controller: namecontroller,
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                   hintText: "Name",
@@ -69,21 +75,31 @@ class BottenSheet extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
-                children: const [
+                children: [
                   BottomContainer(
+                    controller: starttimecontroller,
                     text: 'Start Time',
                   ),
-                  Divider(
-                    color: AppColors.darkgreyColor,
-                  ),
+                  // const Divider(
+                  //   color: AppColors.darkgreyColor,
+                  // ),
                   BottomContainer(
                     text: 'End Time',
+                    controller: endtimecontroller,
                   ),
-                  Divider(
-                    color: AppColors.darkgreyColor,
-                  ),
+                  // const Divider(
+                  //   color: AppColors.darkgreyColor,
+                  // ),
                   BottomContainer(
                     text: 'DAte',
+                    controller: datecontroller,
+                  ),
+                  // const Divider(
+                  //   color: AppColors.darkgreyColor,
+                  // ),
+                  BottomContainer(
+                    text: 'Phone number',
+                    controller: phonenumbetcontroller,
                   ),
                 ],
               ),
@@ -97,7 +113,10 @@ class BottenSheet extends StatelessWidget {
                 ),
                 // style: ButtonStyle(maximumSize: ),
                 child: const Text('Add Schedule'),
-                onPressed: () => Navigator.pop(context),
+
+                onPressed: () {
+                  posting();
+                },
               ),
             ),
           ],
@@ -107,25 +126,54 @@ class BottenSheet extends StatelessWidget {
   }
 }
 
+// class BottomContainer extends StatelessWidget {
+//   const BottomContainer(
+//       {super.key, required this.text, required this.controller});
+//   final String text;
+//   final TextEditingController controller;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       margin: const EdgeInsets.all(10),
+//       padding: const EdgeInsets.symmetric(horizontal: 16),
+//       decoration: BoxDecoration(
+//         color: AppColors.bgblueColor,
+//         borderRadius: BorderRadius.circular(10),
+//       ),
+//       child: TextFormField(
+//         keyboardType: TextInputType.datetime,
+//         controller: controller,
+//         decoration: InputDecoration(
+//           border: InputBorder.none,
+//           suffixText: "90",
+//           hintText: text,
+//           suffixIcon: const Icon(Icons.arrow_forward_ios),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
 class BottomContainer extends StatelessWidget {
-  const BottomContainer({super.key, required this.text});
+  BottomContainer({super.key, required this.text, required this.controller});
   final String text;
+  final TextEditingController controller;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        color: AppColors.bgblueColor,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: TextFormField(
-        keyboardType: TextInputType.datetime,
+    return Form(
+      key: formKey,
+      child: TextField(
+        controller: controller,
         decoration: InputDecoration(
-          border: InputBorder.none,
-          suffixText: "90",
           hintText: text,
           suffixIcon: const Icon(Icons.arrow_forward_ios),
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: AppColors.darkgreyColor,
+            ),
+          ),
         ),
       ),
     );

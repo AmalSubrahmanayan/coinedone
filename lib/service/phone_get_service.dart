@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:coinedone/model/phone_get_model/phone_get_model.dart';
 import 'package:dio/dio.dart';
 
@@ -12,6 +14,7 @@ class PhoneService {
       final List<dynamic> responseData = response.data['data'];
       final List<Datum> data =
           responseData.map((e) => Datum.fromJson(e)).toList();
+          log(data.toString());
       return data;
     } else {
       throw Exception('Failed to load data');
